@@ -7,11 +7,13 @@ contract StdJsonTest is Test {
     using stdJson for string;
 
     string root;
-    string path;
+    string readPath;
+    string writePath;
 
     function setUp() public {
         root = vm.projectRoot();
-        path = string.concat(root, "/test/fixtures/test.json");
+        readPath = string.concat(root, "/test/fixtures/testRead.json");
+        writePath = string.concat(root, "/test/fixtures/testWrite.json");
     }
 
     struct SimpleJson {
@@ -26,7 +28,7 @@ contract StdJsonTest is Test {
     }
 
     function test_readJson() public view {
-        string memory json = vm.readFile(path);
+        string memory json = vm.readFile(readPath);
         assertEq(json.readUint(".a"), 123);
     }
 
@@ -35,9 +37,9 @@ contract StdJsonTest is Test {
         json.serialize("a", uint256(123));
         string memory semiFinal = json.serialize("b", string("test"));
         string memory finalJson = json.serialize("c", semiFinal);
-        finalJson.write(path);
+        finalJson.write(writePath);
 
-        string memory json_ = vm.readFile(path);
+        string memory json_ = vm.readFile(writePath);
         bytes memory data = json_.parseRaw("$");
         NestedJson memory decodedData = abi.decode(data, (NestedJson));
 

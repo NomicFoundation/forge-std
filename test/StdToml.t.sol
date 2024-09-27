@@ -7,11 +7,13 @@ contract StdTomlTest is Test {
     using stdToml for string;
 
     string root;
-    string path;
+    string readPath;
+    string writePath;
 
     function setUp() public {
         root = vm.projectRoot();
-        path = string.concat(root, "/test/fixtures/test.toml");
+        readPath = string.concat(root, "/test/fixtures/testRead.toml");
+        writePath = string.concat(root, "/test/fixtures/testWrite.toml");
     }
 
     struct SimpleToml {
@@ -26,7 +28,7 @@ contract StdTomlTest is Test {
     }
 
     function test_readToml() public view {
-        string memory json = vm.readFile(path);
+        string memory json = vm.readFile(readPath);
         assertEq(json.readUint(".a"), 123);
     }
 
@@ -35,9 +37,9 @@ contract StdTomlTest is Test {
         json.serialize("a", uint256(123));
         string memory semiFinal = json.serialize("b", string("test"));
         string memory finalJson = json.serialize("c", semiFinal);
-        finalJson.write(path);
+        finalJson.write(readPath);
 
-        string memory toml = vm.readFile(path);
+        string memory toml = vm.readFile(readPath);
         bytes memory data = toml.parseRaw("$");
         NestedToml memory decodedData = abi.decode(data, (NestedToml));
 
