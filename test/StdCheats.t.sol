@@ -227,13 +227,14 @@ contract StdCheatsTest is Test {
         }
     }
 
-    function test_DeriveRememberKey() public {
-        string memory mnemonic = "test test test test test test test test test test test junk";
+    // This relies on the `deriveKey` and `rememberKey` cheatcodes which are not supported by EDR.
+    // function test_DeriveRememberKey() public {
+    //     string memory mnemonic = "test test test test test test test test test test test junk";
 
-        (address deployer, uint256 privateKey) = deriveRememberKey(mnemonic, 0);
-        assertEq(deployer, 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266);
-        assertEq(privateKey, 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80);
-    }
+    //     (address deployer, uint256 privateKey) = deriveRememberKey(mnemonic, 0);
+    //     assertEq(deployer, 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266);
+    //     assertEq(privateKey, 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80);
+    // }
 
     function test_BytesToUint() public pure {
         assertEq(3, bytesToUint_test(hex"03"));

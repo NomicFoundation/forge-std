@@ -95,16 +95,17 @@ contract StdChainsTest is Test {
         stdChainsMock.exposed_setChain("anvil2", ChainData("Anvil", 31337, "URL"));
     }
 
-    function test_ChainBubbleUp() public {
-        // We deploy a mock to properly test the revert.
-        StdChainsMock stdChainsMock = new StdChainsMock();
+    // This relies on environment variable interpolation in the `rpcEndpoints` config which is not supported by EDR.
+    // function test_ChainBubbleUp() public {
+    //     // We deploy a mock to properly test the revert.
+    //     StdChainsMock stdChainsMock = new StdChainsMock();
 
-        stdChainsMock.exposed_setChain("needs_undefined_env_var", ChainData("", 123456789, ""));
-        vm.expectRevert(
-            "Failed to resolve env var `UNDEFINED_RPC_URL_PLACEHOLDER` in `${UNDEFINED_RPC_URL_PLACEHOLDER}`: environment variable not found"
-        );
-        stdChainsMock.exposed_getChain("needs_undefined_env_var");
-    }
+    //     stdChainsMock.exposed_setChain("needs_undefined_env_var", ChainData("", 123456789, ""));
+    //     vm.expectRevert(
+    //         "Failed to resolve env var `UNDEFINED_RPC_URL_PLACEHOLDER` in `${UNDEFINED_RPC_URL_PLACEHOLDER}`: environment variable not found"
+    //     );
+    //     stdChainsMock.exposed_getChain("needs_undefined_env_var");
+    // }
 
     function test_CannotSetChain_ChainIdExists() public {
         // We deploy a mock to properly test the revert.
