@@ -14,7 +14,7 @@ module.exports = {
     rpcEndpoints: {
       mainnet: "https://eth.merkle.io",
       optimism_sepolia: "https://sepolia.optimism.io/",
-      arbitrum_one_sepola: "https://sepolia-rollup.arbitrum.io/rpc/",
+      arbitrum_one_sepolia: "https://sepolia-rollup.arbitrum.io/rpc/",
       needs_undefined_env_var: "${UNDEFINED_RPC_URL_PLACEHOLDER}"
     },
     fuzz: {
