@@ -11,11 +11,13 @@ module.exports = {
   },
   solidityTest: {
     testFail: true,
-    rpcEndpoints: {
-      mainnet: "https://eth.merkle.io",
-      optimism_sepolia: "https://sepolia.optimism.io/",
-      arbitrum_one_sepolia: "https://sepolia-rollup.arbitrum.io/rpc/",
-      needs_undefined_env_var: "${UNDEFINED_RPC_URL_PLACEHOLDER}"
+    forking: {
+      rpcEndpoints: {
+        mainnet: "https://eth.merkle.io",
+        optimism_sepolia: "https://sepolia.optimism.io/",
+        arbitrum_one_sepolia: "https://sepolia-rollup.arbitrum.io/rpc/",
+        needs_undefined_env_var: "${UNDEFINED_RPC_URL_PLACEHOLDER}"
+      }
     },
     fuzz: {
       // Used to ensure deterministic fuzz execution
